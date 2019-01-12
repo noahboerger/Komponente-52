@@ -3,13 +3,6 @@ import java.util.ArrayList;
 
 public class Komponente52 {
 
-    public static void main(String args[]) {
-        ArrayList<BigInteger> primes = Komponente52.getInstance().innerMethodExecute(new BigInteger("2") , new BigInteger("293"));
-        for(BigInteger bigint : primes) {
-            System.out.println(bigint.intValue());
-        }
-    }
-
     private static Komponente52 instance = new Komponente52();
     public Port port;
 
@@ -28,11 +21,11 @@ public class Komponente52 {
         }
     }
 
-    public ArrayList<BigInteger> innerMethodExecute(BigInteger rangeFrom, BigInteger rangeTo) {
+    private ArrayList<BigInteger> innerMethodExecute(BigInteger rangeFrom, BigInteger rangeTo) {
         ArrayList<BigInteger> candidates = generatePrimes(rangeFrom, rangeTo);
         ArrayList<BigInteger> solution = new ArrayList<>();
-        for (BigInteger number: candidates) {
-            if(checkNumber(number)) {
+        for (BigInteger number : candidates) {
+            if (checkNumber(number)) {
                 solution.add(number);
             }
         }
@@ -40,7 +33,6 @@ public class Komponente52 {
     }
 
     private boolean checkNumber(BigInteger candidate) {
-        System.out.println(candidate.intValue());
         char[] candidateChars = candidate.toString().toCharArray();
         StringBuilder reverse = new StringBuilder();
         for (int i = (candidateChars.length - 1); i >= 0; i--) {
@@ -54,7 +46,7 @@ public class Komponente52 {
         ArrayList<BigInteger> list = new ArrayList();
         BigInteger counter = new BigInteger(rangeFrom.toString());
         while (counter.compareTo(rangeTo.add(new BigInteger("1"))) != 0) {
-            if(isPrime(counter)) {
+            if (isPrime(counter)) {
                 list.add(counter);
             }
             counter = counter.add(new BigInteger("1"));
@@ -62,16 +54,16 @@ public class Komponente52 {
         return list;
     }
 
-    private boolean isPrime(BigInteger testNumber){
-        int divisorCounter=1;
-        BigInteger index,i ;
+    private boolean isPrime(BigInteger testNumber) {
+        int divisorCounter = 1;
+        BigInteger index, i;
 
-        for ( index= new BigInteger("2"); index.compareTo(testNumber) !=1; index=index.add(new BigInteger("1"))){
-            for(i= new BigInteger("2"); i.compareTo(index) != 1; i=i.add(new BigInteger("1"))){
-                if((testNumber.mod(i).equals(BigInteger.ZERO) )){
+        for (index = new BigInteger("2"); index.compareTo(testNumber) != 1; index = index.add(new BigInteger("1"))) {
+            for (i = new BigInteger("2"); i.compareTo(index) != 1; i = i.add(new BigInteger("1"))) {
+                if ((testNumber.mod(i).equals(BigInteger.ZERO))) {
                     divisorCounter++;
                 }
-                if(divisorCounter>2){
+                if (divisorCounter > 2) {
                     return false;
                 }
             }
